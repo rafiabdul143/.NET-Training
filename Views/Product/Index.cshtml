@@ -1,0 +1,45 @@
+@model List<GeneralStoreApp.Models.Product>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h2>General Store — Product List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Add New Product</a>
+</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Expiry Date</th>
+            <th>Supplier</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Category</td>
+                <td>@product.Brand</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@product.Quantity</td>
+                <td>@product.ExpiryDate.ToShortDateString()</td>
+                <td>@product.SupplierName</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
